@@ -1,13 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
 import MovieList from "../componentes/MovieList";
+import axios from "axios";
 
 const HomeScreen = () => {
-  const [movies, setMovies] = useState([1, 2, 3]);
+  const url = "https://yts.mx/api/v2/list_movies.json";
+  const [movies, setMovies] = useState([]);
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(url);
+      const content = response.data;
+      const { movies: data } = content.data;
+      setMovies(data);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  });
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 24, paddingVertical: 8 }}>
-      <FlatList data={movies} renderItem={() => <MovieList />} />
+      <FlatList
+        data={movies}
+        keyExtractor={({ item }) => item}
+        renderItem={({ item }) => <MovieList item={item} />}
+      />
     </View>
   );
 };

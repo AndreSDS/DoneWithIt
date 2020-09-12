@@ -30,5 +30,10 @@ export const Year = styled.Text`
 export const Rating = styled.Text`
   color: #ff0;
   margin-top: 8px;
-  font-size: 12px;
+  font-size: 14px;
+`;
+
+export const RatingStars = styled.Text`
+  color: #ffdf00;
+  padding-top: 5px;
 `;
