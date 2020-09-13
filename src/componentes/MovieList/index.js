@@ -1,5 +1,4 @@
 import React from "react";
-import { Text, View, Image } from "react-native";
 
 import {
   Container,
@@ -11,14 +10,14 @@ import {
   RatingStars,
 } from "./styles";
 
-const MovieList = ({ item }) => {
+const MovieList = ({ item, onPress }) => {
   const getStars = () => {
     let stars = "";
     return stars.padStart(item.rating, "★");
   };
 
   return (
-    <Container>
+    <Container onPress={onPress}>
       <MovieImage source={{ uri: item.medium_cover_image }} />
       <Info style={{ flex: 1 }}>
         <Name numberOfLines={1}>{item.title}</Name>
